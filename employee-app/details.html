@@ -28,11 +28,21 @@
 
   <script>
     // Sample hardcoded employee data
-    const employees = {
+    let employees = {
       "1001": { name: "أحمد محمد", floor: "2", room: "201" },
       "1002": { name: "سارة علي", floor: "3", room: "305" },
       "1003": { name: "خالد يوسف", floor: "1", room: "101" }
     };
+
+    // Try to load employee data from localStorage
+    const storedData = localStorage.getItem('employeeData');
+    if (storedData) {
+      try {
+        employees = JSON.parse(storedData);
+      } catch (e) {
+        // If parsing fails, keep hardcoded data
+      }
+    }
 
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
